@@ -15,6 +15,7 @@ type Props = {
   lastSignedIn: string,
   googleSigninEnabled: boolean,
   slackSigninEnabled: boolean,
+  auth0SigninEnabled: boolean,
 };
 
 function Home(props: Props) {

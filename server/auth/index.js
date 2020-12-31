@@ -11,6 +11,7 @@ import { stripSubdomain } from '../../shared/utils/domains';
 import slack from './slack';
 import google from './google';
 import discord from './discord';
+import auth0 from './auth0';
 import email from './email';
 
 const app = new Koa();
@@ -20,6 +21,7 @@ router.use('/', slack.routes());
 router.use('/', google.routes());
 router.use('/', email.routes());
 router.use('/', discord.routes());
+router.use('/', auth0.routes());
 
 router.get('/redirect', auth(), async ctx => {
   const user = ctx.state.user;
