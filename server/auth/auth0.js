@@ -26,8 +26,6 @@ async function deserializeAuth0Token(
     },
   });
 
-  console.log(user)
-
   return {
     _user: {
       id: user.sub,
@@ -36,8 +34,8 @@ async function deserializeAuth0Token(
       avatarUrl: user.picture,
     },
     _team: {
-      id: 'bedstuystrong',
-      name: 'Bed-Stuy Strong',
+      id: process.env.AUTH0_TEAM_ID,
+      name: process.env.AUTH0_TEAM_NAME,
       avatarUrl: '',
     },
   };

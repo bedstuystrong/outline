@@ -5,6 +5,7 @@ import Codepen from './Codepen';
 import Figma from './Figma';
 import Framer from './Framer';
 import Gist from './Gist';
+import GoogleCalendar from './GoogleCalendar';
 import GoogleDocs from './GoogleDocs';
 import GoogleSheets from './GoogleSheets';
 import GoogleSlides from './GoogleSlides';
@@ -30,6 +31,7 @@ export default {
   Figma,
   Framer,
   Gist,
+  GoogleCalendar,
   GoogleDocs,
   GoogleSheets,
   GoogleSlides,
