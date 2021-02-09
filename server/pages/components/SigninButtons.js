@@ -13,6 +13,7 @@ type Props = {
   lastSignedIn?: string,
   googleSigninEnabled: boolean,
   slackSigninEnabled: boolean,
+  auth0SigninEnabled: boolean,
   guestSigninEnabled?: boolean,
 };
 
@@ -20,17 +21,20 @@ const SigninButtons = ({
   lastSignedIn,
   slackSigninEnabled,
   googleSigninEnabled,
+  auth0SigninEnabled,
   guestSigninEnabled,
 }: Props) => {
+  const noAuthenticationMethods =
+    !slackSigninEnabled && !googleSigninEnabled && !auth0SigninEnabled;
+
   return (
     <Wrapper>
-      {!slackSigninEnabled &&
-        !googleSigninEnabled && (
-          <Notice>
-            Neither Slack or Google sign in is enabled. You must configure at
-            least one authentication method to sign in to Outline.
-          </Notice>
-        )}
+      {noAuthenticationMethods && (
+        <Notice>
+          Neither Slack or Google sign in is enabled. You must configure at
+          least one authentication method to sign in to Outline.
+        </Notice>
+      )}
       {slackSigninEnabled && (
         <Column column>
           <Button href={signin('slack')}>
@@ -52,6 +56,11 @@ const SigninButtons = ({
             {lastSignedIn === 'google' &&
               'You signed in with Google previously'}
           </LastLogin>
+        </Column>
+      )}
+      {auth0SigninEnabled && (
+        <Column column>
+          <Button href={signin('auth0')}>Sign In</Button>
         </Column>
       )}
     </Wrapper>
