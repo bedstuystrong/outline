@@ -38,6 +38,21 @@ if (process.env.SLACK_KEY) {
   }
 }
 
+if (process.env.AUTH0_CLIENT_ID) {
+  [
+    'AUTH0_CLIENT_SECRET',
+    'AUTH0_DOMAIN',
+    'AUTH0_TEAM_ID',
+    'AUTH0_TEAM_NAME',
+  ].forEach(key => {
+    if (!process.env[key]) {
+      console.error(`The ${key} env variable must be set when using Auth0`);
+      // $FlowFixMe
+      process.exit(1);
+    }
+  });
+}
+
 if (!process.env.URL) {
   console.error(
     'The URL env variable must be set to the externally accessible URL, e.g (https://www.getoutline.com)'
