@@ -44,7 +44,7 @@ router.use('/', users.routes());
 router.use('/', collections.routes());
 router.use('/', documents.routes());
 router.use('/', views.routes());
-router.use('/', hooks.routes());
+// router.use('/', hooks.routes());
 router.use('/', apiKeys.routes());
 router.use('/', shares.routes());
 router.use('/', team.routes());
