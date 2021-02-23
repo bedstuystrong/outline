@@ -14,8 +14,8 @@ export const Op = Sequelize.Op;
 export const sequelize = new Sequelize(process.env.DATABASE_URL, {
   typeValidation: true,
   logging: debug('sql'),
-  ssl: true,
+  ssl: process.env.NODE_ENV === 'production',
   dialectOptions: {
-    ssl: true,
+    ssl: process.env.NODE_ENV === 'production',
   },
 });

@@ -4,10 +4,10 @@ import uuid from 'uuid';
 import JWT from 'jsonwebtoken';
 import subMinutes from 'date-fns/sub_minutes';
 import { ValidationError } from '../errors';
-import { DataTypes, sequelize, encryptedFields } from '../sequelize';
+import { DataTypes, sequelize, encryptedFields, Op } from '../sequelize';
 import { publicS3Endpoint, uploadToS3FromUrl } from '../utils/s3';
 import { sendEmail } from '../mailer';
-import { Star, Team, Collection, NotificationSetting, ApiKey } from '.';
+import { Star, Team, Collection, NotificationSetting, ApiKey, Group, GroupUser } from '.';
 
 const DEFAULT_AVATAR_HOST = 'https://tiley.herokuapp.com';
 
@@ -194,6 +194,30 @@ const checkLastAdmin = async model => {
   }
 };
 
+const addToDefaultGroups = async (user, options) => {
+  if (!process.env.DEFAULT_USER_GROUPS) return;
+
+  const groupNames = process.env.DEFAULT_USER_GROUPS.split(',');
+  const groups = await Group.findAll({
+    where: {
+      teamId: user.teamId,
+      name: {
+        [Op.in]: groupNames,
+      },
+    },
+    transaction: options.transaction,
+  });
+
+  if (groups.length) {
+    for (const group of groups) {
+      await group.addUser(user, {
+        through: { createdById: user.id },
+        transaction: options.transaction,
+      });
+    }
+  }
+};
+
 User.beforeDestroy(checkLastAdmin);
 User.beforeDestroy(removeIdentifyingInfo);
 User.beforeSave(uploadAvatar);
@@ -213,6 +237,7 @@ User.afterCreate(async user => {
 // when documents they created are edited by other team members and onboarding
 User.afterCreate(async (user, options) => {
   await Promise.all([
+    addToDefaultGroups(user, options),
     NotificationSetting.findOrCreate({
       where: {
         userId: user.id,
