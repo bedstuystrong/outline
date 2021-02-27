@@ -34,7 +34,6 @@ const NotFound = () => <Search notFound />;
 const RedirectDocument = ({ match }: { match: Object }) => (
   <Redirect to={`/doc/${match.params.documentSlug}`} />
 );
-
 export default function Routes() {
   return (
     <Switch>
@@ -44,9 +43,12 @@ export default function Routes() {
         <SocketProvider>
           <Layout>
             <Switch>
-              <Redirect from="/dashboard" to="/home" />
-              <Route path="/home/:tab" component={Dashboard} />
-              <Route path="/home" component={Dashboard} />
+              <Redirect
+                from="/home"
+                to={process.env.HOME_DOCUMENT_PATH || '/dashboard'}
+              />
+              <Route path="/dashboard/:tab" component={Dashboard} />
+              <Route path="/dashboard" component={Dashboard} />
               <Route exact path="/starred" component={Starred} />
               <Route exact path="/starred/:sort" component={Starred} />
               <Route exact path="/drafts" component={Drafts} />

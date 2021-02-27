@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import {
   ArchiveIcon,
   HomeIcon,
+  NotepadIcon,
   EditIcon,
   SearchIcon,
   StarredIcon,
@@ -87,6 +88,12 @@ class MainSidebar extends React.Component<Props> {
                 icon={<HomeIcon />}
                 exact={false}
                 label="Home"
+              />
+              <SidebarLink
+                to="/dashboard"
+                icon={<NotepadIcon />}
+                exact={false}
+                label="Dashboard"
               />
               <SidebarLink
                 to={{

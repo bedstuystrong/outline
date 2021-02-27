@@ -7,10 +7,9 @@ import Analytics from './Analytics';
 import GlobalStyles from '../../../shared/styles/globals';
 import prefetchTags from '../../utils/prefetchTags';
 
-export const title = 'Outline';
-export const description =
-  'Your team’s knowledge base - Team wiki, documentation, playbooks, onboarding & more…';
-export const screenshotUrl = `${process.env.URL}/screenshot.png`;
+export const title = 'Member Hub';
+export const description = '';
+export const image = `${process.env.URL}/preview.png`;
 
 type Props = {
   children?: React.Node,
@@ -28,7 +27,6 @@ function Layout({ children, loggedIn, sessions }: Props) {
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="referrer" content="origin" />
-          <meta name="slack-app-id" content="A0W3UMKBQ" />
           <meta name="description" content={description} />
           <meta name="theme-color" content="#FFFFFF" />
 
@@ -36,13 +34,12 @@ function Layout({ children, loggedIn, sessions }: Props) {
           <meta name="og:type" content="website" />
           <meta property="og:title" content={title} />
           <meta property="og:description" content={description} />
-          <meta property="og:image" content={screenshotUrl} />
+          <meta property="og:image" content={image} />
 
           <meta name="twitter:card" content="summary_large_image" />
-          <meta name="twitter:domain" value="getoutline.com" />
           <meta name="twitter:title" value={title} />
           <meta name="twitter:description" value={description} />
-          <meta name="twitter:image" content={screenshotUrl} />
+          <meta name="twitter:image" content={image} />
           <meta name="twitter:url" value={process.env.URL} />
 
           <link rel="manifest" href="/manifest.json" />

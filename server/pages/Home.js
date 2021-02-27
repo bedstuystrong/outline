@@ -22,17 +22,16 @@ function Home(props: Props) {
   return (
     <span>
       <Helmet>
-        <title>Outline - Team wiki & knowledge base</title>
+        <title>Bed-Stuy Strong Member Hub</title>
       </Helmet>
       <Grid>
         <Hero id="signin">
           <AuthNotices notice={props.notice} />
-          {process.env.TEAM_LOGO && <Logo src={process.env.TEAM_LOGO} />}
+          {process.env.TEAM_LOGO && (
+            <Logo src={process.env.TEAM_LOGO} alt="Bed-Stuy Strong" />
+          )}
           <h1>Member Hub</h1>
-          <HeroText>
-            Team wiki, documentation, meeting notes, playbooks, onboarding, work
-            logs, brainstorming, & more…
-          </HeroText>
+          <HeroText></HeroText>
           <p>
             <SigninButtons {...props} />
           </p>
