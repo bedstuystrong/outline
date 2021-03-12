@@ -6,7 +6,7 @@ const HeroText = styled.p`
   color: #666;
   font-weight: 500;
   text-align: left;
-  max-width: 600px;
+  max-width: 700px;
   margin-bottom: 1em;
 `;
 
