@@ -10,6 +10,7 @@ import Codepen from "./Codepen";
 import Figma from "./Figma";
 import Framer from "./Framer";
 import Gist from "./Gist";
+import GoogleCalendar from "./GoogleCalendar";
 import GoogleDocs from "./GoogleDocs";
 import GoogleDrawings from "./GoogleDrawings";
 import GoogleDrive from "./GoogleDrive";
@@ -105,6 +106,13 @@ export default [
     icon: () => <Img src="/images/github-gist.png" />,
     component: Gist,
     matcher: matcher(Gist),
+  },
+  {
+    title: "Google Calendar",
+    keywords: "calendar",
+    icon: () => <Img src="/images/google-calendar.png" />,
+    component: GoogleCalendar,
+    matcher: matcher(GoogleCalendar),
   },
   {
     title: "Google Drawings",
