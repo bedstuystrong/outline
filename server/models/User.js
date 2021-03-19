@@ -7,10 +7,10 @@ import uuid from "uuid";
 import { languages } from "../../shared/i18n";
 import { ValidationError } from "../errors";
 import { sendEmail } from "../mailer";
-import { DataTypes, sequelize, encryptedFields } from "../sequelize";
+import { DataTypes, sequelize, encryptedFields, Op } from "../sequelize";
 import { DEFAULT_AVATAR_HOST } from "../utils/avatars";
 import { publicS3Endpoint, uploadToS3FromUrl } from "../utils/s3";
-import { Star, Team, Collection, NotificationSetting, ApiKey } from ".";
+import { Star, Team, Collection, NotificationSetting, ApiKey, Group } from ".";
 
 const User = sequelize.define(
   "user",
@@ -231,10 +231,35 @@ const checkLastAdmin = async (model) => {
   }
 };
 
+const addToDefaultGroups = async (user, options) => {
+  if (!process.env.DEFAULT_USER_GROUPS) return;
+
+  const groupNames = process.env.DEFAULT_USER_GROUPS.split(",");
+  const groups = await Group.findAll({
+    where: {
+      teamId: user.teamId,
+      name: {
+        [Op.in]: groupNames,
+      },
+    },
+    transaction: options.transaction,
+  });
+
+  if (groups.length) {
+    for (const group of groups) {
+      await group.addUser(user, {
+        through: { createdById: user.id },
+        transaction: options.transaction,
+      });
+    }
+  }
+};
+
 User.beforeDestroy(checkLastAdmin);
 User.beforeDestroy(removeIdentifyingInfo);
 User.beforeSave(uploadAvatar);
 User.beforeCreate(setRandomJwtSecret);
+User.afterCreate(addToDefaultGroups);
 User.afterCreate(async (user) => {
   const team = await Team.findByPk(user.teamId);
 
