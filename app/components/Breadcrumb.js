@@ -4,7 +4,6 @@ import {
   ArchiveIcon,
   EditIcon,
   GoToIcon,
-  PadlockIcon,
   ShapesIcon,
   TrashIcon,
 } from "outline-icons";
@@ -103,11 +102,6 @@ const Breadcrumb = ({ document, children, onlyText }: Props) => {
   if (onlyText === true) {
     return (
       <>
-        {collection.private && (
-          <>
-            <SmallPadlockIcon color="currentColor" size={16} />{" "}
-          </>
-        )}
         {collection.name}
         {path.map((n) => (
           <React.Fragment key={n.id}>
@@ -154,16 +148,14 @@ export const Slash = styled(GoToIcon)`
   fill: ${(props) => props.theme.divider};
 `;
 
-const SmallPadlockIcon = styled(PadlockIcon)`
-  display: inline-block;
-  vertical-align: sub;
-`;
-
 const SmallSlash = styled(GoToIcon)`
-  width: 15px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
+  vertical-align: middle;
   flex-shrink: 0;
-  opacity: 0.25;
+
+  fill: ${(props) => props.theme.slate};
+  opacity: 0.5;
 `;
 
 const Crumb = styled(Link)`
