@@ -10,6 +10,7 @@ import {
   TrashIcon,
   PlusIcon,
   SettingsIcon,
+  NotepadIcon,
 } from "outline-icons";
 import * as React from "react";
 import { DndProvider } from "react-dnd";
@@ -27,6 +28,7 @@ import Collections from "./components/Collections";
 import Section from "./components/Section";
 import SidebarLink from "./components/SidebarLink";
 import TeamButton from "./components/TeamButton";
+import env from "env";
 import useStores from "hooks/useStores";
 import AccountMenu from "menus/AccountMenu";
 
@@ -99,6 +101,14 @@ function MainSidebar() {
                 exact={false}
                 label={t("Home")}
               />
+              {env.HOME_DOCUMENT_PATH && (
+                <SidebarLink
+                  to="/documents"
+                  icon={<NotepadIcon color="currentColor" />}
+                  exact={false}
+                  label={t("Documents")}
+                />
+              )}
               <SidebarLink
                 to={{
                   pathname: "/search",
@@ -135,8 +145,8 @@ function MainSidebar() {
                 active={
                   documents.active
                     ? !documents.active.publishedAt &&
-                      !documents.active.isDeleted &&
-                      !documents.active.isTemplate
+                    !documents.active.isDeleted &&
+                    !documents.active.isTemplate
                     : undefined
                 }
               />

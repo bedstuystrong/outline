@@ -18,6 +18,7 @@ import Layout from "components/Layout";
 import LoadingPlaceholder from "components/LoadingPlaceholder";
 import Route from "components/ProfiledRoute";
 import SocketProvider from "components/SocketProvider";
+import env from "env";
 import { matchDocumentSlug as slug } from "utils/routeHelpers";
 
 const SettingsRoutes = React.lazy(() => import("./settings"));
@@ -36,9 +37,9 @@ export default function AuthenticatedRoutes() {
     <SocketProvider>
       <Layout>
         <Switch>
-          <Redirect from="/dashboard" to="/home" />
-          <Route path="/home/:tab" component={Home} />
-          <Route path="/home" component={Home} />
+          <Redirect from="/home" to={env.HOME_DOCUMENT_PATH || "/documents"} />
+          <Route path="/documents/:tab" component={Home} />
+          <Route path="/documents" component={Home} />
           <Route exact path="/starred" component={Starred} />
           <Route exact path="/starred/:sort" component={Starred} />
           <Route exact path="/templates" component={Templates} />

@@ -25,7 +25,7 @@ function Home() {
   return (
     <Scene
       icon={<HomeIcon color="currentColor" />}
-      title={t("Home")}
+      title={t("Documents")}
       actions={
         <>
           <Action>
@@ -42,18 +42,18 @@ function Home() {
       }
     >
       {!ui.languagePromptDismissed && <LanguagePrompt />}
-      <Heading>{t("Home")}</Heading>
+      <Heading>{t("Documents")}</Heading>
       <Tabs>
-        <Tab to="/home" exact>
+        <Tab to="/documents" exact>
           {t("Recently updated")}
         </Tab>
-        <Tab to="/home/recent" exact>
+        <Tab to="/documents/recent" exact>
           {t("Recently viewed")}
         </Tab>
-        <Tab to="/home/created">{t("Created by me")}</Tab>
+        <Tab to="/documents/created">{t("Created by me")}</Tab>
       </Tabs>
       <Switch>
-        <Route path="/home/recent">
+        <Route path="/documents/recent">
           <PaginatedDocumentList
             key="recent"
             documents={documents.recentlyViewed}
@@ -61,7 +61,7 @@ function Home() {
             showCollection
           />
         </Route>
-        <Route path="/home/created">
+        <Route path="/documents/created">
           <PaginatedDocumentList
             key="created"
             documents={documents.createdByUser(user)}
@@ -70,7 +70,7 @@ function Home() {
             showCollection
           />
         </Route>
-        <Route path="/home">
+        <Route path="/documents">
           <PaginatedDocumentList
             documents={documents.recentlyUpdated}
             fetch={documents.fetchRecentlyUpdated}
