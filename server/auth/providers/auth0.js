@@ -2,11 +2,11 @@
 import passport from "@outlinewiki/koa-passport";
 import Router from "koa-router";
 import Auth0Strategy from "passport-auth0";
-import accountProvisioner from "../commands/accountProvisioner";
-import env from "../env";
-import auth from "../middlewares/authentication";
-import passportMiddleware from "../middlewares/passport";
-import { StateStore } from "../utils/passport";
+import accountProvisioner from "../../commands/accountProvisioner";
+import env from "../../env";
+import auth from "../../middlewares/authentication";
+import passportMiddleware from "../../middlewares/passport";
+import { StateStore } from "../../utils/passport";
 
 const router = new Router();
 const providerName = "auth0";
