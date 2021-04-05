@@ -118,7 +118,7 @@ function SettingsSidebar() {
               />
             )}
           </Section>
-          {can.update && (
+          {can.update && isHosted && (
             <Section>
               <Header>{t("Integrations")}</Header>
               <SidebarLink
