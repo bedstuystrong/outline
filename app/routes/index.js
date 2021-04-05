@@ -8,7 +8,7 @@ import Route from "components/ProfiledRoute";
 const Authenticated = React.lazy(() => import("components/Authenticated"));
 const AuthenticatedRoutes = React.lazy(() => import("./authenticated"));
 const KeyedDocument = React.lazy(() => import("scenes/Document/KeyedDocument"));
-const Login = React.lazy(() => import("scenes/Login"));
+const Login = React.lazy(() => import("scenes/Login/Custom"));
 const Logout = React.lazy(() => import("scenes/Logout"));
 
 export default function Routes() {

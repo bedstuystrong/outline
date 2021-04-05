@@ -104,9 +104,8 @@ class Provider extends React.Component<Props, State> {
         <ButtonLarge
           onClick={() => (window.location.href = authUrl)}
           icon={icon ? <Logo>{icon}</Logo> : null}
-          fullwidth
         >
-          {isCreate ? "Sign up" : "Continue"} with {name}
+          Sign in
         </ButtonLarge>
       </Wrapper>
     );
