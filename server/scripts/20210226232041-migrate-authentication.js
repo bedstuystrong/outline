@@ -40,7 +40,10 @@ export default async function main(exit = false) {
 
     for (const user of users) {
       const provider = user.service;
-      const providerId = user.team[`${provider}Id`];
+      const providerId =
+        provider === "auth0"
+          ? process.env.AUTH0_DOMAIN
+          : user.team[`${provider}Id`];
       if (!providerId) {
         console.error(
           `user ${user.id} has serviceId ${user.serviceId}, but team ${provider}Id missing`
